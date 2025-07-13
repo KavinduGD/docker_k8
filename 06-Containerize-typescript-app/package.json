@@ -1,0 +1,21 @@
+{
+  "name": "06-containerize-typescript-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "github:types/express",
+    "@types/node": "^24.0.13",
+    "typescript": "^5.8.3"
+  }
+}
