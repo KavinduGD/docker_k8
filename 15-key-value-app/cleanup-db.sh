@@ -21,7 +21,7 @@ fi
 
 if [ "docker volume ls -q -f name=$VOLUME_NAME" ]; then
     echo "Volume name with $VOLUME_NAME is removing"
-    docker volume rm $VOLUME_NAMEd 
+    docker volume rm $VOLUME_NAME
 else
     echo "Volume name with $VOLUME_NAME does not exits"
 fi

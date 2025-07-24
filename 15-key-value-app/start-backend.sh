@@ -19,7 +19,7 @@ if [ "$(docker ps -q -f name=$BACKEND_CONTAINER_NAME)" ]; then
 fi
 
 docker build -t $BACKEND_IMAGE_NAME \
--f backend/Dockerfile.dev \
+-f backend/Dockerfile.product \
 backend
 
 docker run -d --rm  \
