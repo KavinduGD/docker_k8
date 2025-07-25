@@ -12,10 +12,12 @@ function RouteTableMap({ googleRoutes, stations, startLocation }) {
     libraries: ["places"],
   });
 
+  console.log("testenv", import.meta.env.VITE_GOOGLE_API_KEY);
+
   const mapRef = useRef();
 
   const center = useMemo(
-    () => ({ lat:53.79377638417939, lng: -1.7563649007954596 }),
+    () => ({ lat: 53.79377638417939, lng: -1.7563649007954596 }),
     []
   );
 

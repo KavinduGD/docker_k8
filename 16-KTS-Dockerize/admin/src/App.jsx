@@ -7,7 +7,6 @@ import Login from "./pages/loginpage";
 import { useUserContext } from "./hooks/useUserAuthContext";
 import AddRoute from "./pages/addRoutes";
 import EmployeesPage from "./pages/employees";
-import AddNoticesPage from "./pages/addNotices";
 import AddBusPage from "./pages/addBusPage";
 import BusesPage from "./pages/buses";
 import AddEmployeePage from "./pages/addEmployeePage";
@@ -60,10 +59,6 @@ function App() {
               element={user ? <TicketsPage /> : <Navigate to="/login" />}
             />
 
-            <Route
-              path="/add-notices"
-              element={user ? <AddNoticesPage /> : <Navigate to="/login" />}
-            />
             <Route
               path="/insert-buses"
               element={user ? <AddBusPage /> : <Navigate to="/login" />}

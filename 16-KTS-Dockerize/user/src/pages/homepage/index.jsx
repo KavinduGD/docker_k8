@@ -1,25 +1,14 @@
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import { BsClipboardData } from "react-icons/bs";
 import { FaPhone } from "react-icons/fa6";
-import { doc, onSnapshot } from "firebase/firestore";
-import { useEffect } from "react";
-import { db } from "../../firebase";
 import { useState } from "react";
 
 function Home() {
-  const [notices, setNotices] = useState(['Bus started at london from 6am','London bus arrives to the university at 8am']);
+  const [notices, setNotices] = useState([
+    "Bus started at london from 6am",
+    "London bus arrives to the university at 8am",
+  ]);
   //get real time snapshot from firebase and update notices
-
-  useEffect(() => {
-    const unsub = onSnapshot(doc(db, "notices", "13"), (doc) => {
-      console.log("Current data: ", doc.data());
-      setNotices((prev) => [...prev, doc.data().messages1]);
-    });
-
-    return () => {
-      unsub();
-    };
-  }, []);
 
   return (
     <div>
@@ -405,7 +394,7 @@ function Home() {
                         className="text-[13px] text-[#545454]"
                         style={{ lineHeight: "normal" }}
                       >
-                       Felicity Evangeline Beaumont
+                        Felicity Evangeline Beaumont
                       </p>
                       <p className="font-barlows font-medium text-[18px]">
                         0114334564
