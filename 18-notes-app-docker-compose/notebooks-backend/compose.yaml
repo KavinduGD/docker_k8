@@ -4,17 +4,17 @@ services:
   notebooks:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      target: notebookID
     ports:
       - 3000:3000
     environment:
       - PORT=3000
       - MONGO_URL=mongodb://${MONGO_NOTEBOOKS_USER}:${MONGO_NOTEBOOKS_PASSWORD}@notebooks-db/${MONGO_NOTEBOOKS_DB}
-    develop:
-      watch:
-        - path: src
-          target: /app/src
-          action: sync
+    # develop:
+    #   watch:
+    #     - path: src
+    #       target: /app/src
+    #       action: sync
     networks:
       - notebooks-net
     depends_on:

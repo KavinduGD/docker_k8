@@ -1,0 +1,9 @@
+services:
+  notebooks:
+    networks:
+      - notes-app-net
+  notes:
+    environment:
+      - NOTEBOOK_URL=http://notebooks:3000/api/notebooks/
+    networks:
+      - notes-app-net
