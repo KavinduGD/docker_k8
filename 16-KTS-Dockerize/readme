@@ -1,0 +1,90 @@
+KTS is a web application for booking tickets for students in some institute
+Users have there own front end to booking tickets and view QR contained
+Admin have his own frontend to manage employees, routes, buses
+
+KTS application contained 3 services 
+    1. admin - frontend for admin
+    2. user - front end for a user
+    3. backend
+
+
+
+
+
+
+
+First Start backend service - use start-backend.sh
+______________________________________________________________
+docker build -t kts-backend -f ./backend/Dockerfile ./backend
+
+docker run -d --rm \
+ --name backend \
+ -p 4000:4000 \
+ --env-file ./backend/.env \
+ kts-backend_
+ _____________________________________________________________
+
+replace environment variables in backend/.env file 
+
+______________________________________________________________
+CLOUDINARY_URL=
+EMAIL_HOST=
+EMAIL_PASS=
+EMAIL_USER=
+JWT_SECRET=
+MONGO_URI=
+______________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+Then start user and admin front-ends - user start-user.sh and start-admin.sh
+
+start-user.sh
+
+_______________________________________________________________
+source .env
+
+docker build -t kts-user \
+--build-arg VITE_GOOGLE_API_KEY=$VITE_GOOGLE_API_KEY \
+-f ./user/Dockerfile \
+./user
+
+docker run -d --rm \
+ --name user \
+ -p 3001:80 \
+ kts-user
+________________________________________________________________
+
+.env file should contain google maps id
+________________________________________________________________
+export VITE_GOOGLE_API_KEY=
+________________________________________________________________
+
+start-admin.sh
+________________________________________________________________
+source .env
+
+docker build -t kts-admin \
+--build-arg VITE_GOOGLE_API_KEY=$VITE_GOOGLE_API_KEY \
+-f ./admin/Dockerfile \
+./admin
+
+docker run -d --rm \
+ --name admin \
+ -p 3000:80 \
+ kts-admin
+________________________________________________________________
+
+.env file should contain google maps id
+________________________________________________________________
+export VITE_GOOGLE_API_KEY=
+________________________________________________________________

@@ -1,0 +1,10 @@
+name: KTS
+
+services:
+  user:
+    build:
+      context: .
+      args:
+        - VITE_GOOGLE_API_KEY=${VITE_GOOGLE_API_KEY}
+    ports:
+      - 3001:80

@@ -1,0 +1,22 @@
+KTS is a web application for booking tickets for students in some institute
+Users have there own front end to booking tickets and view QR contained
+Admin have his own frontend to manage employees, routes, buses
+
+KTS application contained 3 services 1. admin - frontend for admin 2. user - front end for a user 3. backend
+
+1. replace environment variables in backend/.env file
+   CLOUDINARY_URL=
+   EMAIL_HOST=
+   EMAIL_PASS=
+   EMAIL_USER=
+   JWT_SECRET=
+   MONGO_URI=
+
+2. ./user/.env file should contain google maps id
+   export VITE_GOOGLE_API_KEY=
+
+3. ./admin/,env file should contain google maps id
+   export VITE_GOOGLE_API_KEY=
+
+4. then run the docker-compose
+   docker-compose up

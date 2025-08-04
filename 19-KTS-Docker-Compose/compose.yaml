@@ -1,0 +1,4 @@
+include:
+  - backend/compose.yaml
+  - user/compose.yaml
+  - admin/compose.yaml
