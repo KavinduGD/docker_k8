@@ -27,8 +27,4 @@
 
 - **Minikube drivers are only for local development**
 
-## Pods
-
-- **each pods can have multiple containers**
-- **pods running = at least one container is running**
-- **containers in a pod and communicate via localhost**
+## 🛑 Also minikube only has one node - by default Minikube runs everything (control-plane + workloads) on a single node.
