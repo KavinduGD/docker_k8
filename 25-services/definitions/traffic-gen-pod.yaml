@@ -9,5 +9,5 @@ spec:
     - name: traffic-gen
       image: kavinduorg/traffic-gen:1.1.0
       args:
-        - "google-external--name-service"
+        - "color-api-nodeport/api"
         - "2"

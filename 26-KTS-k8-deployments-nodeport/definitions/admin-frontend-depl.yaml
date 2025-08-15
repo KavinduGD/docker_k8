@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kts-admin-frontend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kts-admin-frontend
+  template:
+    metadata:
+      labels:
+        app: kts-admin-frontend
+    spec:
+      containers:
+        - name: kts-admin-frontend
+          image: kavinduorg/kts-admin-frontend:1.0.1
+          ports:
+            - containerPort: 80
