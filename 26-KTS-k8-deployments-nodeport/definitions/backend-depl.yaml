@@ -17,20 +17,20 @@ spec:
           image: kavinduorg/kts-backend:1.0.0
           ports:
             - containerPort: 4000
-          env:
-            - name: CLOUDINARY_URL
-              value: ""
-            - name: EMAIL_HOST
-              value: ""
-            - name: EMAIL_PASS
-              value: ""
-            - name: EMAIL_USER
-              value: ""
-            - name: FRONTEND_URL
-              value: "
-            - name: JWT_SECRET
-              value: ""
-            - name: MONGO_URI
-              value: ""
-            - name: PORT
-              value: "4000"
+          # env:
+          #   - name: CLOUDINARY_URL
+          #     value: ""
+          #   - name: EMAIL_HOST
+          #     value: ""
+          #   - name: EMAIL_PASS
+          #     value: ""
+          #   - name: EMAIL_USER
+          #     value: ""
+          #   - name: FRONTEND_URL
+          #     value: "
+          #   - name: JWT_SECRET
+          #     value: ""
+          #   - name: MONGO_URI
+          #     value: ""
+          #   - name: PORT
+          #     value: "4000"

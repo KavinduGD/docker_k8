@@ -28,3 +28,5 @@
 - **Minikube drivers are only for local development**
 
 ## 🛑 Also minikube only has one node - by default Minikube runs everything (control-plane + workloads) on a single node.
+
+<img src="./images/arch.png" width=1000>

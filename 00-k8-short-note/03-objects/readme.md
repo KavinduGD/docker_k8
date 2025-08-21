@@ -5,6 +5,7 @@
 - **each pods can have multiple containers**
 - **pods running = at least one container is running**
 - **containers in a pod and communicate via localhost**
+- **kubelet is the process that watch and take care of pods in the worker node**
 
 ## Replicasets
 
