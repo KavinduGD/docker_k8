@@ -6,6 +6,7 @@
 - **pods running = at least one container is running**
 - **containers in a pod and communicate via localhost**
 - **kubelet is the process that watch and take care of pods in the worker node**
+- **Pods are immutable after creation**
 
 ## Replicasets
 
@@ -58,6 +59,10 @@
 - **Maps the service to external DNS name**
 - **use to redirect traffic to outside the cluster**
 - **ExternalName Services rely on CNAMEs/DNS resolution**
+
+---
+
+**🛑 🛑 Service DNS resolution works with just the service name only if the sender and the service are in the same namespace. Otherwise, you must use the Fully Qualified Domain Name (FQDN).**
 
 ## 🛑 How kube proxy routes requests
 
