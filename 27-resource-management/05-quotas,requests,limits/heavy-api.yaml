@@ -1,0 +1,20 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: heavy-api
+#   namespace: dev
+#   labels:
+#     app: heavy-api
+# spec:
+#   containers:
+#     - name: heavy-api
+#       image: kavinduorg/color-api:1.1.0
+#       resources:
+#         requests:
+#           cpu: "1"
+#           memory: "1256Mi"
+#         limits:
+#           cpu: "2"
+#           memory: "1812Mi"
+#       ports:
+#         - containerPort: 80
