@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: traffic-gen-pod
+  labels:
+    app: traffic-gen
+spec:
+  containers:
+    - name: traffic-gen
+      image: kavinduorg/traffic-gen:1.1.0
+      imagePullPolicy: Always
+      args:
+        - "color-api-svc/api"
+        - "2"
