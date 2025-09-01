@@ -1,6 +1,6 @@
 ## Docker compose
 
-### docker compose vs watch
+### bind mount vs watch
 
 - **In docker compose watch is better than bind mount**
 - **watcher** Compose watches the host folder and syncs changes to the container.
@@ -30,9 +30,9 @@
 
 - **Compose file join**
 
-```bash
-# use in include
-include:
-  - notebooks-backend/compose.yaml
-  - notes-backend/compose.yaml
-```
+  ```bash
+  # use include
+  include:
+    - notebooks-backend/compose.yaml
+    - notes-backend/compose.yaml
+  ```

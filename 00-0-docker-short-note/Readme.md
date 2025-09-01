@@ -4,13 +4,19 @@
 
 ## Containers vs VMs
 
+<img src="./images/container_vs_vm.png" width=700>
+
 ## Docker client and Docker host
+
+<img src="./images/dclinet_vs_dhost.png" width=700>
 
 ## Docker context
 
 ## Container lifecycle
 
 ## Container Layers
+
+<img src="./images/layers.png" width=500>
 
 ## Multi-stage Dockerfile
 
@@ -23,7 +29,16 @@
 
 ## Volumes
 
+- **Data persists even if container is removed.**
+- **Stored in Docker-managed directories (/var/lib/docker/volumes/)**
+
+<img src="./images/volumes.png" width=500>
+
 ## Bind mount
+
+- **Maps host directory/file → container path.**
+- **Real-time sync between host and container.**
+- **Good for local dev.**
 
 ## CPU Limits
 
@@ -62,7 +77,7 @@ docker run --cpu-shares=512 ubuntu
   - One container has `-c 1024`
   - Another has `-c 512`
   - The first gets 2x more CPU than the second, if they compete.
-- ⚠️ Only matters when CPU is contended.
+- ⚠️ Only matters when CPU is contended. (fighting)
 
 ---
 
