@@ -20,16 +20,41 @@
 
 ---
 
-### 2. local
+### 2. local - type of PersistentVolume
 
 - **Mounts a file or directory from the host node's filesystem into your Pod.**
 - **superseded hostPath**
 - **If a pod is using that local volume, kube-scheduler will only schedule that pod to a node that has the specified local volume.** (That is defined by in configuration)
-- **Only support static provisioning.** (need to create PV first)
+- **Only support static provisioning.** (need to exist before scheduling)
+
+#### steps
+
+- create a directory on the node
+- create a PersistentVolume that points to that directory
+- create a PersistentVolumeClaim that binds to that PersistentVolume
+- create a Pod that uses that PersistentVolumeClaim
 
 ### 3. persistentVolumeClaim
 
 - **Persistent storage that outlives the Pod**
+- **PersistentVolumeClaim reserves a PV or create and reserve a new PV**
+- **reserves a PV** - static provisioning (need to exist before scheduling)
+- **creates and reserves a PV** - dynamic provisioning (on-demand)
+- **PersistentVolumeClaim and PersistentVolume has one-to-one mapping.**
+- **ReclaimPolicy**
+
+      - Retain = keep PV after PVC is deleted (manual cleanup required) (default for statically provisioned PVs)
+      - Recycle = basic scrub (rm -rf /thevolume/*)
+      - Delete = delete PV after PVC is deleted (default for dynamically provisioned PVs)
+
+- **😀 In Kubernetes, a Pod cannot connect directly to a PersistentVolume (PV). Instead, it must use a PersistentVolumeClaim (PVC)**
+
+#### Static Provisioning vs Dynamic Provisioning
+
+- **Static Provisioning**: An administrator manually creates a number of PersistentVolumes. Users then create PersistentVolumeClaims to bind to these existing PersistentVolumes.
+- **Dynamic Provisioning**: When a PersistentVolumeClaim is created, and if no existing PersistentVolume matches the claim, Kubernetes can automatically provision a new PersistentVolume based on the StorageClass specified in the claim.
+
+<img src="./images/static_dynamic.png" alt="pvc-pv" width="500" />
 
 ### 4. configMap
 
