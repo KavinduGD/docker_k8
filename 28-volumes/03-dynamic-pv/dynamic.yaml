@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dynamic-vol-claim
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  # By default storage class is standard
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce

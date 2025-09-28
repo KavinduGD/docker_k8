@@ -96,3 +96,36 @@ No — a Service in Kubernetes does not belong to any single node.
 - 🛑 All kube-proxy instances on all nodes are aware of every Service and set up the necessary routing rules.
 
 ## 🛑 Services are virtual; kube-proxy uses a routing table to forward pod requests to matching pods via the Service’s IP.
+
+## StatefulSets
+
+- **StatefulSets are like Deployments, but with added guarantees about the ordering and uniqueness of Pods.**
+- **Create pods with own unique, stable network IDs and stable storage.**
+- **Use Cases:**
+  - **Databases (e.g., MongoDB, Cassandra)**
+  - **Queue systems (e.g., RabbitMQ, Kafka)**
+- **Key Features:**
+
+  - **Stable, unique network identifiers**
+  - **Stable storage (Persistent Volumes)**
+  - **Ordered, graceful deployment and scaling**
+
+<img src="./images/statefulset.png" width=600 />
+
+- **Each replica in the statefulset gets its own persistent volume claim, which is not shared with other replicas.**
+- **Pods names and network IDs are stable and predictable and follow the pattern: `<statefulset-name>-<ordinal-index>`**
+
+- **These volumes can be static or dynamically provisioned.**
+
+## Headless Service
+
+- **In Kubernetes, a headless service is a Service without a cluster IP.**
+
+- **Normal ClusterIP services get a stable virtual IP that load-balances traffic across the backing pods.**
+
+- **A headless service sets clusterIP: None, which means:**
+  - Kubernetes does not allocate a cluster IP.
+  - Instead of load balancing, DNS returns the individual pod IPs behind the service.
+  - Useful when you need direct pod-to-pod communication, e.g., for databases (MySQL, Cassandra, StatefulSets).
+
+> curl color-ss-0.color-svc
