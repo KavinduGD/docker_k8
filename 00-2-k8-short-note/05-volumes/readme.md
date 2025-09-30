@@ -59,6 +59,14 @@
 ### 4. configMap
 
 - **Inject configuration data into Pods**
+- **Decouple configuration artifacts from pod**
+
+#### Config maps can we used in the following ways:
+
+- **As environment variables**
+- **Mounting as files in a volume** - Each key in the ConfigMap becomes a file in the volume, and the value of the key becomes the content of the file.
+
+<img src="./images/config_maps.png" alt="config-maps" width="750" />
 
 ### 5. secret
 
