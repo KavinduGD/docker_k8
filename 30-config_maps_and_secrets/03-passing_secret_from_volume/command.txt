@@ -1,0 +1,1 @@
+kubectl create secret generic db-creds --from-literal=db-user=root --from-literal=db-pass=WinstonK123

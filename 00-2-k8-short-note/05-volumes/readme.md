@@ -71,6 +71,15 @@
 ### 5. secret
 
 - **Inject sensitive data into Pods**
+- **🛑 Stored in base64 encoded format by default, not encrypted**
+- **🛑 Can be encrypted at rest**
+- **Like ConfigMap, can be used as environment variables or mounted as files in a volume**
+- **In addition to generic secrets, Kubernetes supports specific types of secrets for different use cases, such as Docker registry credentials and TLS certificates.**
+- **Best practice is not to create secrets from manifest files, but to create them using kubectl**
+
+```bash
+kubectl create secret generic my-secret --from-literal=username=myuser --from-literal=password=mypassword
+```
 
 ### 6. nfs, awsElasticBlockStore, azureDisk, gcePersistentDisk, etc.
 
