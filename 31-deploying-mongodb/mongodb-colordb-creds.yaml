@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongodb-colordb-creds
+  labels:
+    app: mondogb
+type: Opaque
+data:
+  username: Y29sb3JkYi11c2Vy #colordb-user
+  password: Y29sb3JkYi1wYXNz # colordb-pass

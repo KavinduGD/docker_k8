@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongodb-root-creds
+  labels:
+    app: mondogb
+type: Opaque
+data:
+  username: cm9vdC11c2Vy #root-user
+  password: cm9vdC1wYXNz # root-pass
