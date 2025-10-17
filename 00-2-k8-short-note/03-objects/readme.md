@@ -129,3 +129,38 @@ No — a Service in Kubernetes does not belong to any single node.
   - Useful when you need direct pod-to-pod communication, e.g., for databases (MySQL, Cassandra, StatefulSets).
 
 > curl color-ss-0.color-svc
+
+## Ingress
+
+- **Ingress is an API object that manages external access to services in a cluster, typically HTTP.**
+- **Provides load balancing, SSL termination, and name-based virtual hosting.**
+- **Requires an Ingress Controller to implement the rules defined in the Ingress resource.**
+- **Use Cases:**
+  - **Expose multiple services under the same IP address using different hostnames or paths.**
+  - **Terminate SSL/TLS for secure connections.**
+
+### path-based routing
+
+- **Route traffic based on URL paths to different services.**
+- **Example:**
+  - `/app1` routes to Service A
+  - `/app2` routes to Service B
+
+### host-based routing
+
+- **Route traffic based on the hostname in the request.**
+- **Example:**
+  - `app1.example.com` routes to Service A
+  - `app2.example.com` routes to Service B
+
+<img src="./images/ingress.png" width=600 />
+
+### Ingress vs Ingress Controller
+
+- **Ingress** is a set of rules for routing external HTTP/S traffic to services within the cluster.
+- **Ingress Controller** is the actual implementation that enforces those rules, typically running as a pod within the cluster.
+- **Popular Ingress Controllers:**
+  - NGINX Ingress Controller
+  - Traefik
+  - HAProxy Ingress
+  - Istio Ingress Gateway
