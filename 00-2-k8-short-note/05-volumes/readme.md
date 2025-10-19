@@ -81,6 +81,7 @@
 kubectl create secret generic my-secret --from-literal=username=myuser --from-literal=password=mypassword
 ```
 
-### 6. nfs, awsElasticBlockStore, azureDisk, gcePersistentDisk, etc.
+### 6. nfs, awsElasticBlockStore, azureDisk, gcePersistentDisk, etc. (Types of PersistentVolume)
 
 - **Cloud provider or network storage solutions**
+- **When we create PVC and PV in the cloud environment with the Storageclass (in aws gp2,ssd ..), the underlying volume is created in the cloud provider automatically.**
