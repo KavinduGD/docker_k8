@@ -173,3 +173,12 @@ docker run --memory=1g --memory-swap=2g ubuntu
 | overlay | Overlay networks connect multiple Docker daemons together.               |
 | ipvlan  | IPvlan networks provide full control over both IPv4 and IPv6 addressing. |
 | macvlan | Assign a MAC address to a container.                                     |
+
+## Exec form vs Shell form
+
+- **Exec form**: `["executable", "param1", "param2"]`
+  - Preferred form. No shell processing.
+  - Example: `ENTRYPOINT ["python", "app.py"]`
+- **Shell form**: `"command param1 param2"`
+  - Runs in `/bin/sh -c`. Shell features available.
+  - Example: `CMD "python app.py"`
