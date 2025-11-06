@@ -85,3 +85,18 @@ kubectl create secret generic my-secret --from-literal=username=myuser --from-li
 
 - **Cloud provider or network storage solutions**
 - **When we create PVC and PV in the cloud environment with the Storageclass (in aws gp2,ssd ..), the underlying volume is created in the cloud provider automatically.**
+- **Each EBS volume is created in the same Availability Zone (AZ) as the node that’s using it.**
+
+<img src="./images/eks.png" width="1200" />
+
+#### AWS EBS vs EFS
+
+<img src='./images/ebs_vs_efs.png' width='800'/>
+
+- **Ebs**
+  - You can attach it to only one EC2 instance (node) at a time.
+  - EBS volumes in Kubernetes support only ReadWriteOnce (RWO) mode
+  - Kubernetes pods running on different nodes cannot mount the same EBS volume simultaneously.
+- **Efs**
+  - EFS supports ReadWriteMany
+  - Can be mounted on multiple pods across multiple nodes
