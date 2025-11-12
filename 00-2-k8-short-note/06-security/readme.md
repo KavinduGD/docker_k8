@@ -139,5 +139,40 @@ kubectl config set-credentials alice --client-certificate=alice.crt --client-key
 # set context
 kubectl config set-context alice-context --cluster=my-cluster --user=alice --kubeconfig=alice.kubeconfig
 # use the context
-
 ```
+
+## Service Accounts
+
+<img src="images/sa.png" width="800"/>
+
+- In Kubernetes, a Service Account (SA) is an identity that pods use to interact with the Kubernetes API or other services securely.
+
+> **User accounts** → used by humans (e.g., kubectl, dashboard).
+
+> **Service accounts** → used by processes running inside pods.
+
+- Each pod runs under a specific service account (by default, the default service account in its namespace). By default , default service account have no roles or permissions assigned. But still pods can access configmaps and secrets in the same namespace. Why is that?
+  - You’re seeing your pod access a ConfigMap or Secret without RBAC permissions, and that’s 100% expected — because you’re not using the Kubernetes API to read them.
+  - You’re using the pod spec mount mechanism, which is handled internally by the kubelet, not by the pod’s service account permissions.
+- This account determines what permissions the pod has to access cluster resources.
+
+### Why We Need Service Accounts
+
+- Imagine a pod that needs to:
+
+  - List ConfigMaps,
+  - Watch for Secrets,
+  - Or call the Kubernetes API.
+
+- If every pod used the same identity, that’s a security risk — a compromised pod could access anything.
+- Service accounts allow fine-grained access control using RBAC (Role-Based Access Control).
+
+- Example use cases:
+- CI/CD pipelines that deploy to clusters.
+- Controllers or operators (like the Horizontal Pod Autoscaler).
+- Custom applications needing Kubernetes API access.
+
+### JWT token in service accounts
+
+- When a service account is created, Kubernetes automatically generates a JSON Web Token (JWT) for that account.
+- Mounted under `/var/run/secrets/kubernetes.io/serviceaccount/token` inside pods using that service account.
