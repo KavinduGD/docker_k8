@@ -176,3 +176,36 @@ kubectl config set-context alice-context --cluster=my-cluster --user=alice --kub
 
 - When a service account is created, Kubernetes automatically generates a JSON Web Token (JWT) for that account.
 - Mounted under `/var/run/secrets/kubernetes.io/serviceaccount/token` inside pods using that service account.
+
+---
+
+---
+
+---
+
+# Network Policy
+
+- A Kubernetes NetworkPolicy is a way to control how pods communicate with each other and with the outside world.
+- Think of it as a firewall for pods.
+- By default, pods can communicate with any other pod in the cluster (no restrictions).
+
+## What Network Policies Control
+
+1. Ingress – who can send traffic to your pod
+2. Egress – where your pod is allowed to send traffic
+
+- In order for Network Policies to have any effect, the CNI (Container Network Interface) plugin used in the cluster must support network policies.
+
+<img src="images/np.png" width="600"/>
+
+- Does return traffic need to be explicitly allowed?
+
+  - No.
+  - Kubernetes NetworkPolicies are stateful (unlike iptables firewall rules that can be stateless).
+  - ➡️ This means reply/return traffic is automatically allowed, as long as your policy allows the initial outbound request.
+
+- There are multiple ways we can configure the rules for ingress and egress traffic:
+  - Pod Selector: use matchLabels and matchExpressions
+  - Namespace Selector: use matchLabels and matchExpressions
+  - IP Block: use CIDR blocks
+  - Ports and Protocols: define specific ports and protocols
