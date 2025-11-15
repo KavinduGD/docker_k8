@@ -229,3 +229,122 @@ egress:
           matchLabels:
             k8s-app: kube-dns
 ```
+
+# ✅ Pod Security Standards (PSS) – A Complete, Easy-to-Learn Guide
+
+Kubernetes Pod Security Standards (PSS) define a set of security requirements for Pods. They help cluster administrators ensure that pods are created with safe configurations, reducing the risk of security vulnerabilities or privilege escalation.
+
+PSS define three security levels:
+
+- Privileged
+- Baseline
+- Restricted
+
+These standards are implemented using Pod Security Admission (PSA) in Kubernetes 1.25+.
+
+### 🚦 1. Privileged (Most Permissive)
+
+Purpose:
+
+Allows workloads that need powerful access to the node, such as:
+
+- System daemons
+- CNI plugins
+- Storage drivers
+
+Characteristics:
+
+Privileged mode allows the pod to:
+
+- Run as root unrestricted
+- Use host namespaces
+- Mount hostPath volumes
+- Add any Linux capability
+- Use privileged containers
+
+When to use:
+
+Only for trusted infrastructure components.
+
+### ⚖️ 2. Baseline (Middle Ground – Default for Most Workloads)
+
+Purpose:
+
+Block known risky settings while still allowing normal application workloads.
+
+Restrictions Include:
+
+- ❌ No privileged containers
+- ❌ No host networking / PID / IPC
+- ❌ No hostPath volumes (except read-only, controlled cases)
+- ❌ No dangerous capabilities (e.g., SYS_ADMIN)
+- ✔️ Running as root is allowed (but controlled)
+- ✔️ Some flexible volume plugins allowed
+
+Who uses Baseline?
+
+Developers deploying typical apps that don’t need deep system access.
+
+### 🔒 3. Restricted (Most Secure)
+
+Purpose:
+
+Enforce strong, hardened security suitable for multi-tenant or zero-trust environments.
+
+Restrictions:
+
+- Must run as non-root
+- Must drop ALL Linux capabilities
+- Only allow safe volume types (ConfigMap, Secret, PVC, downwardAPI)
+- No privilege escalation (allowPrivilegeEscalation: false)
+- Seccomp profile must be set (RuntimeDefault)
+- No host namespace usage
+- Read-only root filesystem recommended
+
+Who uses Restricted?
+
+Security-critical workloads, regulated industries, production clusters needing strong isolation.
+
+### 🧩 How Kubernetes Enforces PSS (Pod Security Admission)
+
+You label namespaces with one of the PSS levels:
+
+```bash
+pod-security.kubernetes.io/<MODE.: <LEVEL>
+```
+
+Where:
+
+- `<MODE>` can be `enforce`, `audit`, or `warn`
+- `<LEVEL>` can be `privileged`, `baseline`, or `restricted`  
+  Example: Enforce baseline mode in the "dev" namespace:
+
+```bash
+kubectl label namespace dev \
+    pod-security.kubernetes.io/enforce=baseline
+```
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: privileged
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/warn: baseline
+```
+
+available modes:
+
+- enforce → blocks violations
+- audit → logs violations
+- warn → warns users during apply
+
+Example: Enforce restricted, warn & audit baseline:
+
+```bash
+kubectl label namespace secure \
+    pod-security.kubernetes.io/enforce=restricted \
+    pod-security.kubernetes.io/warn=baseline \
+    pod-security.kubernetes.io/audit=baseline
+```
