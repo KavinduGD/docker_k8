@@ -209,3 +209,23 @@ kubectl config set-context alice-context --cluster=my-cluster --user=alice --kub
   - Namespace Selector: use matchLabels and matchExpressions
   - IP Block: use CIDR blocks
   - Ports and Protocols: define specific ports and protocols
+
+### Egress traffic and DNS problem
+
+<img src="images/egress-dns.png" width="500"/>
+
+- If the backend pods want to make request to the database, it happen through database service.
+- So first backend pod should resolve the database service name to an IP address using DNS.
+- If there is no egress rule allowing traffic to the DNS server, the DNS resolution will fail, and the backend pod won't be able to connect to the database.
+- To fix this, we need to add an egress rule to allow traffic to the DNS server.
+
+```yaml
+egress:
+  - to:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: kube-system
+        podSelector:
+          matchLabels:
+            k8s-app: kube-dns
+```
