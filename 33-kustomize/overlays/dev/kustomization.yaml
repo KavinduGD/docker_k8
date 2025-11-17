@@ -1,0 +1,51 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+namespace: dev
+
+namePrefix: dev-
+nameSuffix: -alpha
+
+commonLabels:
+  team: redteam
+
+commonAnnotations:
+  developer: test@test.com
+
+replicas:
+  - name: nginx
+    count: 2
+
+generatorOptions:
+  disableNameSuffixHash: true
+# configMapGenerator:
+#   - name: feature-flag-config
+#     literals:
+#       - dbuser=root
+#       - db=users_db
+#     options:
+#       disableNameSuffixHash: true
+#   - name: db-init-config
+#     files:
+#       - db-config=db-init.js
+#   - name: env_config
+#     envs:
+# - .env
+
+secretGenerator:
+  - name: db-secret
+    envs:
+      - .env
+    type: Opaque
+
+patches:
+  - path: update-resources.yaml
+  - path: remove-resources.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: nginx
