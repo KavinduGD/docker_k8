@@ -65,6 +65,8 @@
 
 - **As environment variables**
 - **Mounting as files in a volume** - Each key in the ConfigMap becomes a file in the volume, and the value of the key becomes the content of the file.
+  - 🛑 ConfigMap volume Created by Kubernetes inside the pod’s filesystem for each pod
+  - Ephemeral — disappears when the pod is deleted
 
 <img src="./images/config_maps.png" alt="config-maps" width="750" />
 

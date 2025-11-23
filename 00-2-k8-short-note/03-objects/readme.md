@@ -117,6 +117,8 @@ No — a Service in Kubernetes does not belong to any single node.
 
 - **These volumes can be static or dynamically provisioned.**
 
+- 🛑 🚫 If you want a separate volume per pod, Deployment cannot do that. Only StatefulSets support volumeClaimTemplates → one PVC per pod.
+
 ## Headless Service
 
 - **In Kubernetes, a headless service is a Service without a cluster IP.**

@@ -138,6 +138,16 @@ patches:
   - path: update-resources.yaml
 ```
 
+### Json Patches
+
+For more complex modifications, you can use JSON Patch format.
+
+```yaml
+- op: replace
+  path: /spec/volumeClaimTemplates/0/spec/storageClassName
+  value: premium-rwo
+```
+
 ### Remove Resources
 
 ```yaml
