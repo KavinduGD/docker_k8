@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-app
+spec:
+  template:
+    spec:
+      containers:
+        - name: color-app
+          image: lmacademy/color-api:2.1.0-dev
