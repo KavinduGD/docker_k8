@@ -10,17 +10,53 @@
 
 <img src="./images/dclinet_vs_dhost.png" width=700>
 
+<img src="./images/architecture_with_flow.gif" width=700>
+
+- Docker Client: CLI tool to interact with Docker Host.
+- Docker Host: The server running Docker daemon, managing containers, images, networks, and storage
+- Docker Daemon: Background service on the Docker Host that manages Docker objects.
+
+## Docker build context
+
+- Build context is the directory whose contents are sent to the Docker daemon when building an image.
+
+- WE can use the .dockerignore file to exclude files/folders from the build context.
+
 ## Docker context
 
+- Docker contexts allow you to switch between multiple Docker hosts or environments easily.
+
 ## Container lifecycle
+
+<img src="./images/lifecycle.png" width=1200>
+
+- `docker create`
+  - image is checked/pulled if not present
+  - container is created in "created" state
+  - `docker create -p 3000:3000 --name backend --network  backend-net backend:latest`
+
+- `docker start`
+  - container moves to "running" state
+  - `docker start backend`
+
+- `docker run`
+  - shortcut for create + start
+  - `docker run -d -p 3000:3000 --name backend --network backend-net backend:latest`
 
 ## Container Layers
 
 <img src="./images/layers.png" width=500>
 
+- `docker history <image_name>` to see image layers
+
 ## Multi-stage Dockerfile
 
+- A multi-stage Dockerfile uses multiple FROM instructions so you can build in one stage and run in another.
+- A multi-stage Dockerfile separates build and runtime to produce smaller, safer Docker images.
+
 ## Distroless Images and use-cases
+
+- Distroless images contain ONLY your application and its runtime — no OS, no shell, no package manager.
 
 ## Entrypoint vs CMD
 
@@ -34,11 +70,16 @@
 
 <img src="./images/volumes.png" width=500>
 
+- `docker volume create my-volume`
+- `docker run -v my-volume:/app/data my-image`
+
 ## Bind mount
 
 - **Maps host directory/file → container path.**
 - **Real-time sync between host and container.**
 - **Good for local dev.**
+
+- `docker run -v /host/path:/container/path my-image`
 
 ## CPU Limits
 
