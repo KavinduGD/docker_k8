@@ -1,5 +1,7 @@
 ## Docker compose
 
+- Docker compose is a tool to define and run multi-container docker applications.
+
 ### bind mount vs watch
 
 - **In docker compose watch is better than bind mount**

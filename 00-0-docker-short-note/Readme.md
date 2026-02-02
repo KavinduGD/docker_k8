@@ -81,6 +81,20 @@
 
 - `docker run -v /host/path:/container/path my-image`
 
+## Environment Variables
+
+- `-e` or `--env` to set environment variables in a container.
+
+```sh
+docker run -e "VAR1=value1" -e "VAR2=value2" my-image
+```
+
+- You can also use `--env-file` to load variables from a file:
+
+```sh
+docker run --env-file ./env.list my-image
+```
+
 ## CPU Limits
 
 ### 1. `--cpus` (decimal)
