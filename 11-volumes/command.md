@@ -1,0 +1,36 @@
+# Summary
+
+| Step | Result |
+|------|--------|
+| Volume doesn't exist | Docker creates it |
+| Volume is empty + path in image has content | Docker copies contents from image → volume |
+| Volume already exists | Docker uses as-is (no copy happens) |
+
+## Volume Behavior
+
+| Case | What happens |
+|------|--------------|
+| Volume is empty, mount to image path | Image contents copied to volume (once) |
+| Volume already has files | Volume contents override image files |
+| Image's original index.html visible? | ❌ No — hidden by volume |
+| Want original back? | You must delete the volume and recreate it |
+
+## Example Output
+
+```bash
+kavindu-gihan@mypc:/media/kavindu-gihan/E/Courses/Docker/code/11-volumes$ docker volume inspect website-data
+[
+    {
+        "CreatedAt": "2025-07-17T13:14:41+05:30",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/website-data/_data",
+        "Name": "website-data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
+root@mypc:/var/lib/docker/volumes/website-data/_data# ls
+50x.html  index.html
+```
