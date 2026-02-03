@@ -1,0 +1,3 @@
+- kubectl run nginx-pod --image=nginx
+- kubectl delete pod nginx-pod
+- kubectl expose pod nginx-pod --type=NodePort --port=80

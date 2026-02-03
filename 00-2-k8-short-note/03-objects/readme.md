@@ -24,13 +24,14 @@
 
 - **Deployment is a higher-level abstraction over ReplicaSets and builds on top of ReplicaSets.**
 - **Advanced features**
-
   - **Rolling Updates**
   - **Rollback**
   - **Scaling**
   - **Declarative Updates**
 
 - **In Kubernetes, Deployments detect changes to their Pod template by computing a hash. If the template changes, Kubernetes automatically triggers a rolling update, replacing the old pods with new ones. This is the change-detection mechanism.**
+- **default update strategy is RollingUpdate** (create new pods before terminating old ones)
+- **other update strategy is Recreate** (terminate all old pods before creating new ones)
 
 ## Services
 
@@ -60,6 +61,12 @@
 - **use to redirect traffic to outside the cluster**
 - **ExternalName Services rely on CNAMEs/DNS resolution**
 
+## LoadBalancer
+
+- **provisions a load balancer for the Service in supported cloud providers**
+- **creates a NodePort and ClusterIP service automatically**
+- **exposes the service externally using a cloud provider’s load balancer**
+
 ---
 
 **🛑 🛑 Service DNS resolution works with just the service name only if the sender and the service are in the same namespace. Otherwise, you must use the Fully Qualified Domain Name (FQDN).**
@@ -68,7 +75,6 @@
 
 - **each node has one kube proxy**
 - **steps**
-
   1. **Service is just a definition**
   2. **kube-proxy on every node watches for Services**
      - kube-proxy constantly watches the API server for:
@@ -105,7 +111,6 @@ No — a Service in Kubernetes does not belong to any single node.
   - **Databases (e.g., MongoDB, Cassandra)**
   - **Queue systems (e.g., RabbitMQ, Kafka)**
 - **Key Features:**
-
   - **Stable, unique network identifiers**
   - **Stable storage (Persistent Volumes)**
   - **Ordered, graceful deployment and scaling**

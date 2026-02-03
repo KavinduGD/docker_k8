@@ -1,3 +1,0 @@
-kubectl run nginx-pod --image=nginx
-kubectl delete pod nginx-pod
-kubectl create  pod nginx-pod --type=NodePort --port=80

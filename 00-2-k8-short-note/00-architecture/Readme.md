@@ -4,18 +4,19 @@
 
 ## Control plane (Master node)
 
+- **it's the brain of the cluster, containing the components responsible for managing the entire system.**
 - **can exits one or more node for availability reasons**
 - **each node can be on different vm**
 
 ## Worker node (data node)
 
+- **it's where the actual applications and workloads run.**
 - **can exits one or more node for availability reasons**
 - **each node can be on different vm**
 
 ## How minikube works
 
 - **has many drivers**
-
   - **docker**
     - **create a docker container that has k8 cluster (control plan and worker node are inside of that container)**
     - **so this creates a container a named minikube that is a docker container which also have docker inside of it**
