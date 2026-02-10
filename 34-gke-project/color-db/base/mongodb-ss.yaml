@@ -51,6 +51,8 @@ spec:
           volumeMounts:
             - name: mongodb-init-colordb
               mountPath: /docker-entrypoint-initdb.d
+            - name: mongodb-pvc
+              mountPath: /data/db
       volumes:
         - name: mongodb-init-colordb
           configMap:
