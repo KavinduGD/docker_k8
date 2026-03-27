@@ -233,7 +233,7 @@ docker run --memory=1g --memory-swap=2g ubuntu
 
 - **Exec form**: `["executable", "param1", "param2"]`
   - Preferred form. No shell processing.
-  - Example: `ENTRYPOINT ["python", "app.py"]`
+  - Example: `CMD ["python", "app.py"]`
 - **Shell form**: `"command param1 param2"`
   - Runs in `/bin/sh -c`. Shell features available.
   - Example: `CMD "python app.py"`
