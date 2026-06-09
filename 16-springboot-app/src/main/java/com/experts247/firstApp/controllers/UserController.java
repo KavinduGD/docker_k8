@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
