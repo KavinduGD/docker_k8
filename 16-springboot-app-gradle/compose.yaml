@@ -1,0 +1,8 @@
+services:
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.MultiStage
+    container_name: spring-app
+    ports:
+      - "8080:8080"
