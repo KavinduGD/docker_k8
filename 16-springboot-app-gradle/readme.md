@@ -1,4 +1,4 @@
-# Containerizing a Spring Boot Application with Docker
+# Containerizing a Gradle Spring Boot Application with Docker
 
 ## Project structure
 
@@ -6,19 +6,28 @@
 project-root/
 │
 ├── src/
-├── target/
-├── pom.xml
-├── mvnw
-├── mvnw.cmd
-├── HELP.md
-└── readme.md
+├── build/
+├── .gradle/
+├── gradle/
+├── build.gradle
+├── settings.gradle
+├── gradlew
+├── gradlew.bat
 ```
 
-1. src/main : Contains the Java source code for the Spring Boot application.
-2. src/test : Contains the unit tests for the application.
-3. target : This directory is generated after building the project and contains the compiled classes and the packaged JAR file.
-4. pom.xml : The Maven configuration file that defines the project dependencies and build configuration.
-5. mvnw and mvnw.cmd : These are the Maven Wrapper scripts that allow you to run Maven commands without having Maven installed on your system. They will download the correct version of Maven if it's not already present.
+1. src/main : Contains the Java source code and resources for the Spring Boot application.
+
+2. src/test : Contains the unit tests and integration tests for the application.
+
+3. build : This directory is generated after building the project and contains the compiled classes, test reports, and packaged JAR files.
+
+4. build.gradle : The Gradle configuration file that defines the project dependencies, plugins, and build configuration.
+
+5. settings.gradle : Defines the project name and configuration for multi-module projects.
+
+6. gradlew and gradlew.bat : These are the Gradle Wrapper scripts that allow you to run Gradle commands without having Gradle installed on your system. They will download the correct version of Gradle if it's not already present.
+
+7. gradle : Contains the Gradle Wrapper configuration files required by the Gradle Wrapper to download and use the correct Gradle version.
 
 ---
 
@@ -27,44 +36,42 @@ project-root/
 ### using Single Stage Dockerfile
 
 ```Dockerfile
-FROM maven:3.9-eclipse-temurin-21 AS build
+FROM gradle:8.14-jdk21
 
 WORKDIR /app
 
 COPY . .
 
-RUN mvn clean package -DskipTests
+RUN gradle bootJar --no-daemon
 
-RUN cp target/*.jar app.jar
+RUN cp /app/build/libs/demo-0.0.1-SNAPSHOT.jar /app/demo.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "demo.jar"]
 ```
 
 ### using Multi Stage Dockerfile
 
 ```Dockerfile
-FROM maven:3.9-eclipse-temurin-21 AS build
+FROM gradle:8.14-jdk21 AS build
 
 WORKDIR /app
 
 COPY . .
 
-RUN mvn clean package -DskipTests
+RUN gradle bootJar --no-daemon
 
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY --from=build /app/target/\*.jar /app/app.jar
+COPY --from=build /app/build/libs/demo-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
-
----
 
 - 🛑 JDK is not required to run Jar file
 
