@@ -95,6 +95,48 @@ docker run -e "VAR1=value1" -e "VAR2=value2" my-image
 docker run --env-file ./env.list my-image
 ```
 
+---
+
+## Optimize a docker Image Build
+
+- Use a smaller base image (e.g., `alpine` instead of `ubuntu`).
+- Use multi-stage builds to separate build and runtime.
+- Use Distroless images for production to reduce attack surface.
+- Use `.dockerignore` to exclude unnecessary files from the build context.
+- Use layer caching by ordering Dockerfile instructions from least to most frequently changing.
+
+---
+
+## Running Containers with non root users
+
+```Dockerfile
+FROM node:22-alpine
+
+WORKDIR /app
+
+RUN addgroup -S nodegroup && \
+    adduser -S nodeuser -G nodegroup
+
+RUN chown -R nodeuser:nodegroup /app
+
+USER nodeuser
+
+COPY --chown=nodeuser:nodegroup package*.json .
+
+RUN npm install
+
+COPY --chown=nodeuser:nodegroup . .
+
+EXPOSE 3000
+
+ENTRYPOINT ["node", "app.js"]
+```
+
+- --chown=nodeuser:nodegroup — sets the file owner to nodeuser and group to nodegroup inside the container. Without this, copied files default to root ownership, which your non-root nodeuser may not be able to read/write.
+- This is a feature of Docker's COPY and ADD instructions that allows you to set file ownership during the build process, ensuring proper permissions for non-root users.
+
+---
+
 ## CPU Limits
 
 ### 1. `--cpus` (decimal)
