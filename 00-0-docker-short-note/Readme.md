@@ -135,6 +135,28 @@ ENTRYPOINT ["node", "app.js"]
 - --chown=nodeuser:nodegroup — sets the file owner to nodeuser and group to nodegroup inside the container. Without this, copied files default to root ownership, which your non-root nodeuser may not be able to read/write.
 - This is a feature of Docker's COPY and ADD instructions that allows you to set file ownership during the build process, ensuring proper permissions for non-root users.
 
+- Some Images already contain a non-root user (like node:22-alpine has a node user). In that case, you can just switch to that user and set permissions on the app directory.
+
+```Dockerfile
+FROM node:22-alpine
+
+WORKDIR /app
+
+RUN chown -R node:node /app
+
+USER node
+
+COPY --chown=node:node package*.json .
+
+RUN npm install
+
+COPY --chown=node:node . .
+
+EXPOSE 3000
+
+ENTRYPOINT ["node", "app.js"]
+```
+
 ---
 
 ## CPU Limits
