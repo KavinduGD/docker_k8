@@ -50,3 +50,9 @@ Service
   ▼
 Pod
 ```
+
+- cert-manager requests a certificate from Let's Encrypt.
+- The certificate is stored as a Kubernetes Secret.
+- NGINX or Traefik reads the Secret and performs TLS termination.
+
+<img src="images/ssl-termination-in-ingress.png" width="600px">
