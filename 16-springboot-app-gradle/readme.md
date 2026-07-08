@@ -84,3 +84,39 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 3. **Security**: Multi Stage Dockerfiles can enhance security by minimizing the attack surface of the final image. By excluding build tools and unnecessary dependencies, you reduce the potential vulnerabilities that could be exploited.
 
 4. **Build Time**: Single Stage Dockerfiles may have faster build times since everything is done in one stage. However, Multi Stage Dockerfiles can take longer to build due to the additional stages and copying of artifacts between stages.
+
+---
+
+### how to build the Gradle project
+
+#### ./gradlew build
+
+This command executes a comprehensive chain of tasks grouped under the check and assemble lifecycles.
+
+- It compiles your source files.
+- It runs all of your unit tests and integration tests.
+- It performs static code analysis or linting if configured.
+- Crucially: If the Spring Boot plugin is active, build triggers assemble, which automatically calls bootJar to create your final executable file.
+
+#### ./gradlew bootJar
+
+This is a target-specific command added by the Spring Boot Gradle Plugin.
+
+- It skips testing, code analysis, and documentation generation completely.
+- It intercepts your project's code and its dependencies, bundling them into a self-contained "fat" JAR containing an embedded server (like Tomcat).
+- You can run the resulting file directly via java -jar application.jar.
+
+
+---
+
+### Jar file
+
+#### applciation-0.0.1-SNAPSHOT.jar
+
+The core difference is that 0.0.1-SNAPSHOT.jar is an executable "fat" JAR containing your application and all its dependencies
+
+#### applciation-0.0.1-SNAPSHOT-plain.jar
+
+whereas 0.0.1-SNAPSHOT-plain.jar is a standard "thin" JAR containing only your compiled source classes and resources. It does not include dependency JARs.
+
+
